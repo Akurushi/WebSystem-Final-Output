@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Booking an Appointment</title>
+
+<style>
+:root{
+  --sage:#87a878;
+  --forest:#2d4a2d;
+  --panel:#e7efe3;
+  --line:#b7c7b1;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  font-family:system-ui;
+  background:#f0f3ef;
+}
+
+/* NAV */
+nav{
+  background:var(--sage);
+  padding:12px 24px;
+  display:flex;
+  justify-content:space-between;
+  color:white;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* CONTENT */
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:24px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--line);
+  padding:24px;
+  border-radius:10px;
+}
+
+h2{
+  color:var(--forest);
+  margin-bottom:10px;
+}
+
+p{
+  margin-bottom:16px;
+  color:#333;
+  line-height:1.6;
+}
+
+/* FORM */
+label{
+  display:block;
+  margin-top:12px;
+  font-weight:600;
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border:1px solid var(--line);
+  border-radius:6px;
+}
+
+button{
+  margin-top:18px;
+  background:var(--forest);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#244a24;
+}
+
+/* TIP */
+.tip{
+  margin-top:16px;
+  background:var(--panel);
+  padding:12px;
+  border-left:4px solid var(--forest);
+  border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div>Senior Citizens Hub</div>
+  <a href="guide.html">← Back to Guide</a>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Booking an Appointment</h2>
+    <p>
+      This page simulates how to book an appointment for government services.
+      Choose your schedule carefully.
+    </p>
+
+    <label>Select Office</label>
+    <select>
+      <option>City Hall</option>
+      <option>Health Center</option>
+      <option>Social Welfare Office</option>
+    </select>
+
+    <label>Select Date</label>
+    <input type="date">
+
+    <label>Select Time</label>
+    <input type="time">
+
+    <button>Book Appointment</button>
+
+    <div class="tip">
+      💡 Tip: Morning slots are usually less crowded.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

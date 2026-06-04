@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Check Application Status</title>
+
+<style>
+:root{
+  --sage:#87a878;
+  --forest:#2d4a2d;
+  --line:#b7c7b1;
+  --panel:#e7efe3;
+}
+
+body{
+  margin:0;
+  font-family:system-ui;
+  background:#f0f3ef;
+}
+
+nav{
+  background:var(--sage);
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  color:white;
+}
+
+.container{
+  max-width:800px;
+  margin:24px auto;
+  padding:0 16px;
+}
+
+.card{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:22px;
+}
+
+h2{
+  color:var(--forest);
+  margin-bottom:6px;
+}
+
+.subtitle{
+  color:#444;
+  margin-bottom:18px;
+}
+
+/* Input section */
+input{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-size:1rem;
+  margin-top:8px;
+}
+
+button{
+  margin-top:14px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:var(--forest);
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#255a25;
+}
+
+/* Status card */
+.status-box{
+  margin-top:20px;
+  padding:16px;
+  border-radius:10px;
+  border-left:6px solid var(--forest);
+  background:var(--panel);
+}
+
+.status-title{
+  font-weight:700;
+  color:var(--forest);
+  margin-bottom:6px;
+}
+
+.status-badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:0.85rem;
+  font-weight:600;
+  background:#fff;
+  border:1px solid var(--line);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div>Senior Citizens Hub</div>
+  <a href="guide.html" style="color:white;">← Back</a>
+</nav>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Check Application Status</h2>
+    <div class="subtitle">Enter your tracking number to view progress.</div>
+
+    <label>Reference Number</label>
+    <input type="text" placeholder="e.g. APP-2026-0001">
+
+    <button>Check Status</button>
+
+    <div class="status-box">
+      <div class="status-title">Current Status</div>
+      <span class="status-badge">Pending Review</span>
+
+      <p style="margin-top:10px; color:#333;">
+        Your application is currently being reviewed by the assigned office.
+        Please wait 3–5 working days.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -458,82 +458,113 @@
 
     <main class="main">
 
-      <div class="page-heading">
-        <h1>Stay Safe Online</h1>
-        <p>Learn how to spot and avoid common scams.</p>
+  <div class="page-heading">
+    <h1>Stay Safe Online</h1>
+    <p>Simple guides to help you recognize scams and protect your personal information.</p>
+  </div>
+
+  <!-- ALERT BANNER -->
+  <div class="alert-banner">
+    <div class="alert-banner-header">
+      <div class="alert-icon">!</div>
+      Urgent Alert: Fake Text Messages Claiming "Account Suspension"
+    </div>
+
+    <p style="font-size: 0.85rem; color:#4a5e40;">
+      Scammers are sending messages pretending to be banks or government agencies. They may ask you to click a link or provide personal information. Do NOT click suspicious links.
+    </p>
+
+    <span class="read-more">Learn what to do</span>
+  </div>
+
+  <!-- EMAIL COMPARISON -->
+  <div class="email-comparison">
+
+    <!-- REAL EMAIL -->
+    <div class="email-card real">
+      <div class="email-card-header">
+        <div class="badge-check">✓</div>
+        Real Email
       </div>
 
-      <div class="alert-banner">
-        <div class="alert-banner-header">
-          <div class="alert-icon">!</div>
-          Urgent: New Text Scam Alert
-        </div>
-        <div class="line-placeholder w100"></div>
-        <div class="line-placeholder w80"></div>
-        <span class="read-more">Read More</span>
+      <p style="font-size:0.8rem; color:#4a5e40;">
+        Example: Official bank email about your monthly statement or receipt.
+      </p>
+
+      <p style="font-size:0.78rem; color:#4a5e40;">
+        ✔ Uses official company email (e.g. @bankname.com) <br>
+        ✔ No urgent threats or pressure <br>
+        ✔ Proper grammar and clear message <br>
+        ✔ Does NOT ask for passwords
+      </p>
+
+      <span class="trusted-tag">Trusted Source</span>
+    </div>
+
+    <!-- FAKE EMAIL -->
+    <div class="email-card fake">
+      <div class="email-card-header">
+        <div class="badge-x">✕</div>
+        Fake / Scam Email
       </div>
 
-      <div class="email-comparison">
+      <p style="font-size:0.8rem; color:#1a2e1a;">
+        Example: “Your account will be locked unless you verify immediately!”
+      </p>
 
-        <div class="email-card real">
-          <div class="email-card-header">
-            <div class="badge-check">&#10003;</div>
-            Real Email
-          </div>
-          <div class="line-placeholder w100"></div>
-          <div class="line-placeholder w80"></div>
-          <div class="line-placeholder w60"></div>
-          <div class="line-placeholder w80"></div>
-          <div class="line-placeholder w40"></div>
-          <span class="trusted-tag">Trusted</span>
-        </div>
+      <div class="line-placeholder w100"></div>
+      <div class="line-placeholder w80"></div>
 
-        <div class="email-card fake">
-          <div class="email-card-header">
-            <div class="badge-x">&#10005;</div>
-            Fake/Scam Email
-          </div>
-          <div class="line-placeholder w100"></div>
-          <div class="line-placeholder w80"></div>
-          <div class="line-placeholder w60"></div>
-          <ul class="warning-list">
-            <li>Suspicious link</li>
-            <li>Urgent request for personal info</li>
-            <li>Poor grammar or spelling</li>
-            <li>Unknown sender address</li>
-          </ul>
-        </div>
+      <ul class="warning-list">
+        <li>Suspicious or shortened links</li>
+        <li>Urgent threats like “act now” or “within 24 hours”</li>
+        <li>Requests for passwords or OTP codes</li>
+        <li>Unknown or fake email address</li>
+        <li>Poor grammar and spelling mistakes</li>
+      </ul>
+    </div>
 
-      </div>
+  </div>
 
-      <div class="tips-grid">
+  <!-- SAFETY TIPS -->
+  <div class="tips-grid">
 
-        <div class="tip-card">
-          <img src="Photo/Strongpass.png" alt="Description of my photo">
-          <span class="tip-label">Strong Passwords</span>
-          <p class="tip-desc">Use a mix of letters, numbers, and symbols. Never reuse passwords.</p>
-        </div>
+    <div class="tip-card">
+      <img src="Photo/Strongpass.png" alt="Strong password icon">
+      <span class="tip-label">Use Strong Passwords</span>
+      <p class="tip-desc">
+        Create long passwords with letters, numbers, and symbols. Do not reuse the same password for different accounts.
+      </p>
+    </div>
 
-        <div class="tip-card">
-          <img src="Photo/VerifyIdentity.png" alt="Description of my photo">
-          <span class="tip-label">Verify Identity</span>
-          <p class="tip-desc">Always confirm who is contacting you before sharing any information.</p>
-        </div>
+    <div class="tip-card">
+      <img src="Photo/VerifyIdentity.png" alt="Verify identity icon">
+      <span class="tip-label">Verify the Sender</span>
+      <p class="tip-desc">
+        Always check who is contacting you. If unsure, call the official hotline of the company or bank directly.
+      </p>
+    </div>
 
-        <div class="tip-card">
-          <img src="Photo/SecureWeb.png" alt="Description of my photo">
-          <span class="tip-label">Secure Websites</span>
-          <p class="tip-desc">Look for "https://" and a padlock icon before entering any details.</p>
-        </div>
+    <div class="tip-card">
+      <img src="Photo/SecureWeb.png" alt="Secure website icon">
+      <span class="tip-label">Check Secure Websites</span>
+      <p class="tip-desc">
+        Make sure the website starts with “https://” and has a padlock icon before entering personal details.
+      </p>
+    </div>
 
-      </div>
+  </div>
 
-      <div class="report-banner">
-        <p>Think you've been scammed?</p>
-        <a href="#" class="btn-report">Report a Scam Now</a>
-      </div>
+  <!-- REPORT SECTION -->
+  <div class="report-banner">
+    <p>Think you've encountered a scam or received a suspicious message?</p>
+    <p style="font-size:0.8rem; opacity:0.9;">
+      Reporting helps protect others from becoming victims.
+    </p>
+    <a href="#" class="btn-report">Report a Scam Now</a>
+  </div>
 
-    </main>
+</main>
 
   </div>
 

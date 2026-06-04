@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Filling Out a Government Form</title>
+
+<style>
+:root{
+  --sage:#87a878;
+  --forest:#2d4a2d;
+  --panel:#e7efe3;
+  --line:#b7c7b1;
+  --ink:#0b0b0b;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:system-ui;
+  background:#f0f3ef;
+}
+
+/* NAV */
+nav{
+  background:var(--sage);
+  padding:12px 24px;
+  display:flex;
+  justify-content:space-between;
+  color:white;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* LAYOUT */
+.container{
+  padding:24px;
+  max-width:900px;
+  margin:auto;
+}
+
+/* CARD */
+.card{
+  background:white;
+  border:1px solid var(--line);
+  padding:24px;
+  border-radius:10px;
+}
+
+h2{
+  color:var(--forest);
+  margin-bottom:10px;
+}
+
+p{
+  margin-bottom:16px;
+  color:#333;
+  line-height:1.6;
+}
+
+/* FORM */
+label{
+  display:block;
+  margin-top:12px;
+  font-weight:600;
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:6px;
+  border:1px solid var(--line);
+  border-radius:6px;
+}
+
+button{
+  margin-top:18px;
+  background:var(--forest);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#244a24;
+}
+
+/* TIP */
+.tip{
+  margin-top:16px;
+  background:var(--panel);
+  padding:12px;
+  border-left:4px solid var(--forest);
+  border-radius:6px;
+  font-size:0.95rem;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div>Senior Citizens Hub</div>
+  <a href="guide.html">← Back to Guide</a>
+</nav>
+
+<div class="container">
+  <div class="card">
+    <h2>Filling Out a Government Form</h2>
+    <p>
+      This practice page helps you learn how to complete a basic government form.
+      Follow each field step by step.
+    </p>
+
+    <label>Full Name</label>
+    <input type="text" placeholder="Juan Dela Cruz">
+
+    <label>Date of Birth</label>
+    <input type="date">
+
+    <label>Address</label>
+    <input type="text" placeholder="Enter your full address">
+
+    <label>Type of Application</label>
+    <select>
+      <option>ID Renewal</option>
+      <option>Senior Benefits</option>
+      <option>Registration</option>
+    </select>
+
+    <button>Submit Practice Form</button>
+
+    <div class="tip">
+      💡 Tip: Always double-check your personal information before submitting.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
