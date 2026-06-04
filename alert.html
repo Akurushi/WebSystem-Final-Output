@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Senior Citizens Hub – Scam Alert</title>
+  <style>
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f7f9f5;
+      color: #1a2e1a;
+    }
+
+    nav {
+      background-color: #87a878;
+      border-bottom: 2px solid #6b8f5e;
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-weight: bold;
+      font-size: 1.05rem;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+    }
+
+    nav ul li a {
+      display: block;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 0.9rem;
+      padding: 8px 14px;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s;
+    }
+
+    nav ul li a:hover { color: #2d4a2d; }
+
+    nav ul li a.active {
+      font-weight: bold;
+      color: #2d4a2d;
+      border-bottom: 3px solid #2d4a2d;
+    }
+
+    .page-layout {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      flex: 1;
+    }
+
+    .sidebar {
+      border-right: 1px solid #c5d4bc;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0;
+      background-color: #eef2eb;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 18px;
+      text-decoration: none;
+      color: #1a2e1a;
+      font-size: 0.875rem;
+      border-left: 3px solid transparent;
+      transition: background-color 0.15s;
+    }
+
+    .sidebar-item:hover { background-color: #c8d9c0; }
+
+    .sidebar-item.active {
+      font-weight: bold;
+      border-left-color: #2d4a2d;
+      background-color: #c8d9c0;
+      color: #2d4a2d;
+    }
+
+    .sidebar-icon {
+      width: 18px;
+      height: 18px;
+      border: 1px solid #87a878;
+      border-radius: 3px;
+      background-color: #c8d9c0;
+      flex-shrink: 0;
+    }
+
+    .sidebar-spacer { flex: 1; }
+
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid #c5d4bc;
+      margin: 8px 14px;
+    }
+
+    .main {
+      padding: 32px 36px;
+      background-color: #f7f9f5;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .page-heading h1 {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      color: #2d4a2d;
+    }
+    .page-heading p { font-size: 0.875rem; color: #4a5e40; }
+
+    .alert-banner {
+      border: 1px solid #87a878;
+      border-left: 4px solid #2d4a2d;
+      border-radius: 8px;
+      background-color: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .alert-banner-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #2d4a2d;
+    }
+
+    .alert-icon {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #2d4a2d;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #2d4a2d;
+      flex-shrink: 0;
+    }
+
+    .line-placeholder {
+      height: 10px;
+      background-color: #c8d9c0;
+      border-radius: 4px;
+    }
+    .line-placeholder.w100 { width: 100%; }
+    .line-placeholder.w80  { width: 80%;  }
+    .line-placeholder.w60  { width: 60%;  }
+    .line-placeholder.w40  { width: 40%;  }
+
+    .read-more {
+      font-size: 0.8rem;
+      color: #2d4a2d;
+      text-decoration: underline;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .email-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .email-card {
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .email-card.real {
+      background-color: #f7f9f5;
+      border: 1px solid #87a878;
+    }
+
+    .email-card.fake {
+      background-color: #c8d9c0;
+      border: 1px solid #6b8f5e;
+    }
+
+    .email-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #1a2e1a;
+    }
+
+    .badge-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #87a878;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .badge-x {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #2d4a2d;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .trusted-tag {
+      font-size: 0.75rem;
+      border: 1px solid #87a878;
+      border-radius: 12px;
+      padding: 3px 12px;
+      width: fit-content;
+      background-color: #87a878;
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    .warning-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .warning-list li {
+      font-size: 0.8rem;
+      color: #2d4a2d;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-weight: 500;
+    }
+
+    .warning-list li::before {
+      content: "•";
+      flex-shrink: 0;
+      color: #2d4a2d;
+    }
+
+    /* ── SAFETY TIPS GRID ── */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .tip-card {
+      background-color: #ffffff;
+      border: 1px solid #c5d4bc;
+      border-radius: 8px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+      transition: background-color 0.15s;
+    }
+
+    .tip-card:hover { background-color: #eef2eb; }
+
+    /* Fixed 54x54 tip icon — never resizes */
+    .tip-card img {
+      width: 54px;
+      height: 54px;
+      object-fit: cover;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .tip-label {
+      font-size: 0.85rem;
+      font-weight: bold;
+      color: #2d4a2d;
+    }
+
+    .tip-desc {
+      font-size: 0.78rem;
+      color: #4a5e40;
+      line-height: 1.5;
+    }
+
+    .report-banner {
+      border: 1px solid #87a878;
+      border-radius: 8px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      background-color: #2d4a2d;
+    }
+
+    .report-banner p {
+      font-size: 0.9rem;
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    .btn-report {
+      font-size: 0.875rem;
+      font-weight: bold;
+      padding: 10px 28px;
+      border: 2px solid #ffffff;
+      border-radius: 6px;
+      background-color: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      color: #ffffff;
+      transition: background-color 0.18s, color 0.18s;
+    }
+
+    .btn-report:hover {
+      background-color: #ffffff;
+      color: #2d4a2d;
+    }
+
+    footer {
+      background-color: #87a878;
+      border-top: 2px solid #6b8f5e;
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0 8px;
+      transition: color 0.15s;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: #2d4a2d;
+    }
+
+    .footer-sep {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .help-btn {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: #2d4a2d;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: bold;
+      border: 2px solid #87a878;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: background-color 0.2s;
+    }
+
+    .help-btn:hover { background-color: #3d6b3d; }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="Mainpage.html" class="logo">Senior Citizens Hub</a>
+    <ul>
+      <li><a href="mainpage.html">Home</a></li>
+      <li><a href="guide.html">Guide Mode</a></li>
+      <li><a href="alert.html" class="active">Scam Alert</a></li>
+      <li><a href="accredited.html">Accredited Hospitals</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-layout">
+
+    <aside class="sidebar">
+
+      <a href="mainpage.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Home
+      </a>
+
+      <a href="guide.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Guide Mode
+      </a>
+
+      <a href="alert.html" class="sidebar-item active">
+        <div class="sidebar-icon"></div>
+        Scam Alert
+      </a>
+
+      <a href="accredited.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Accredited Hospitals
+      </a>
+
+      <div class="sidebar-spacer"></div>
+      <hr class="sidebar-divider" />
+
+      <a href="#" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Help &amp; Support
+      </a>
+
+      <a href="index.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Logout
+      </a>
+
+    </aside>
+
+    <main class="main">
+
+      <div class="page-heading">
+        <h1>Stay Safe Online</h1>
+        <p>Learn how to spot and avoid common scams.</p>
+      </div>
+
+      <div class="alert-banner">
+        <div class="alert-banner-header">
+          <div class="alert-icon">!</div>
+          Urgent: New Text Scam Alert
+        </div>
+        <div class="line-placeholder w100"></div>
+        <div class="line-placeholder w80"></div>
+        <span class="read-more">Read More</span>
+      </div>
+
+      <div class="email-comparison">
+
+        <div class="email-card real">
+          <div class="email-card-header">
+            <div class="badge-check">&#10003;</div>
+            Real Email
+          </div>
+          <div class="line-placeholder w100"></div>
+          <div class="line-placeholder w80"></div>
+          <div class="line-placeholder w60"></div>
+          <div class="line-placeholder w80"></div>
+          <div class="line-placeholder w40"></div>
+          <span class="trusted-tag">Trusted</span>
+        </div>
+
+        <div class="email-card fake">
+          <div class="email-card-header">
+            <div class="badge-x">&#10005;</div>
+            Fake/Scam Email
+          </div>
+          <div class="line-placeholder w100"></div>
+          <div class="line-placeholder w80"></div>
+          <div class="line-placeholder w60"></div>
+          <ul class="warning-list">
+            <li>Suspicious link</li>
+            <li>Urgent request for personal info</li>
+            <li>Poor grammar or spelling</li>
+            <li>Unknown sender address</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="tips-grid">
+
+        <div class="tip-card">
+          <img src="Photo/StrongPass.png" alt="Description of my photo">
+          <span class="tip-label">Strong Passwords</span>
+          <p class="tip-desc">Use a mix of letters, numbers, and symbols. Never reuse passwords.</p>
+        </div>
+
+        <div class="tip-card">
+          <img src="Photo/VerifyIdentity.png" alt="Description of my photo">
+          <span class="tip-label">Verify Identity</span>
+          <p class="tip-desc">Always confirm who is contacting you before sharing any information.</p>
+        </div>
+
+        <div class="tip-card">
+          <img src="Photo/SecureWeb.png" alt="Description of my photo">
+          <span class="tip-label">Secure Websites</span>
+          <p class="tip-desc">Look for "https://" and a padlock icon before entering any details.</p>
+        </div>
+
+      </div>
+
+      <div class="report-banner">
+        <p>Think you've been scammed?</p>
+        <a href="#" class="btn-report">Report a Scam Now</a>
+      </div>
+
+    </main>
+
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#">Terms of Use</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Help Center</a>
+    </div>
+  </footer>
+
+  <button class="help-btn" title="Help">?</button>
+
+</body>
+</html>

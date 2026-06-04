@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Senior Citizens Hub – Hospital & Provider Locator</title>
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@700&display=swap');
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 15px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: #f7f9f5;
+      color: #1a2e1a;
+    }
+
+    /* ══════════════════════════════════════
+       NAV  →  Sage green (#87a878)
+    ══════════════════════════════════════ */
+    nav {
+      background-color: #87a878;
+      border-bottom: 2px solid #6b8f5e;
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .logo {
+      font-weight: bold;
+      font-size: 1.05rem;
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+    }
+
+    nav ul li a {
+      display: block;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 0.9rem;
+      padding: 8px 14px;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s;
+    }
+
+    nav ul li a:hover { color: #2d4a2d; }
+
+    nav ul li a.active {
+      font-weight: bold;
+      color: #2d4a2d;
+      border-bottom: 3px solid #2d4a2d;
+    }
+
+    /* ══════════════════════════════════════
+       PAGE LAYOUT  =  sidebar + main
+    ══════════════════════════════════════ */
+    .page-layout {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      flex: 1;
+    }
+
+    /* ══════════════════════════════════════
+       LEFT SIDEBAR
+    ══════════════════════════════════════ */
+    .sidebar {
+      border-right: 1px solid #c5d4bc;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 0;
+      background-color: #eef2eb;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 18px;
+      text-decoration: none;
+      color: #1a2e1a;
+      font-size: 0.875rem;
+      border-left: 3px solid transparent;
+      transition: background-color 0.15s;
+    }
+
+    .sidebar-item:hover { background-color: #c8d9c0; }
+
+    .sidebar-item.active {
+      font-weight: bold;
+      border-left-color: #2d4a2d;
+      background-color: #c8d9c0;
+      color: #2d4a2d;
+    }
+
+    .sidebar-icon {
+      width: 18px;
+      height: 18px;
+      border: 1px solid #87a878;
+      border-radius: 3px;
+      background-color: #c8d9c0;
+      flex-shrink: 0;
+    }
+
+    .sidebar-spacer { flex: 1; }
+
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid #c5d4bc;
+      margin: 8px 14px;
+    }
+
+    /* ══════════════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════════════ */
+    .main {
+      padding: 32px 36px;
+      background-color: #f7f9f5;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .page-heading h1 {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      color: #2d4a2d;
+    }
+    .page-heading p { font-size: 0.875rem; color: #4a5e40; }
+
+    /* ── SEARCH BAR PANEL ── */
+    .search-panel {
+      background-color: #ffffff;
+      border: 1px solid #c5d4bc;
+      border-left: 4px solid #2d4a2d;
+      border-radius: 8px;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .search-panel-title {
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: #2d4a2d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-panel-title .search-icon-circle {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #2d4a2d;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #2d4a2d;
+      flex-shrink: 0;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 12px;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .search-input-wrap {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
+    }
+
+    .search-input-wrap input {
+      width: 100%;
+      padding: 10px 14px 10px 36px;
+      border: 1px solid #c5d4bc;
+      border-radius: 6px;
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 0.875rem;
+      color: #1a2e1a;
+      background-color: #f7f9f5;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .search-input-wrap input:focus {
+      border-color: #87a878;
+      background-color: #ffffff;
+    }
+
+    .search-input-wrap .input-icon {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: #6b8f5e;
+      pointer-events: none;
+    }
+
+    /* ── FILTER DROPDOWN ── */
+    .filter-wrap {
+      position: relative;
+      min-width: 200px;
+    }
+
+    .filter-wrap select {
+      width: 100%;
+      padding: 10px 36px 10px 14px;
+      border: 1px solid #c5d4bc;
+      border-radius: 6px;
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 0.875rem;
+      color: #1a2e1a;
+      background-color: #f7f9f5;
+      outline: none;
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .filter-wrap select:focus {
+      border-color: #87a878;
+      background-color: #ffffff;
+    }
+
+    .filter-wrap .dropdown-arrow {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 0.75rem;
+      color: #6b8f5e;
+    }
+
+    .btn-search {
+      padding: 10px 28px;
+      background-color: #2d4a2d;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 0.875rem;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color 0.18s;
+    }
+
+    .btn-search:hover { background-color: #3d6b3d; }
+
+    /* ── ACTIVE FILTER TAGS ── */
+    .filter-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-tag-label {
+      font-size: 0.78rem;
+      color: #4a5e40;
+    }
+
+    .filter-tag {
+      font-size: 0.75rem;
+      border: 1px solid #87a878;
+      border-radius: 12px;
+      padding: 3px 12px;
+      background-color: #87a878;
+      color: #ffffff;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-tag .tag-remove {
+      cursor: pointer;
+      font-size: 0.7rem;
+      opacity: 0.8;
+    }
+
+    .filter-tag .tag-remove:hover { opacity: 1; }
+
+    /* ── MAP + RESULTS SPLIT ── */
+    .map-results-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      min-height: 340px;
+    }
+
+    /* Map panel — warm off-white left */
+    .map-panel {
+      background-color: #f7f9f5;
+      border: 1px solid #87a878;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-panel-header {
+      background-color: #2d4a2d;
+      color: #ffffff;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Map image placeholder — replace with <img src="your-map.png"> */
+    .map-image-area {
+      flex: 1;
+      background-color: #c8d9c0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 280px;
+      overflow: hidden;
+    }
+
+    /* When user provides a map image, it goes here */
+    .map-image-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Placeholder shown when no image yet */
+    .map-placeholder-text {
+      text-align: center;
+      color: #4a5e40;
+      font-size: 0.85rem;
+      padding: 20px;
+    }
+
+    .map-placeholder-text .map-pin {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    /* Mock map pins overlay */
+    .map-pins {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .pin {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      border: 2px solid #ffffff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    }
+
+    .pin.hospital { background-color: #2d4a2d; }
+    .pin.clinic   { background-color: #87a878; }
+
+    /* Results panel — soft eucalyptus right */
+    .results-panel {
+      background-color: #c8d9c0;
+      border: 1px solid #6b8f5e;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .results-panel-header {
+      background-color: #2d4a2d;
+      color: #ffffff;
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .results-count {
+      font-size: 0.75rem;
+      background-color: #87a878;
+      color: #ffffff;
+      padding: 2px 10px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
+
+    .results-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .result-card {
+      background-color: #ffffff;
+      border: 1px solid #c5d4bc;
+      border-radius: 6px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      transition: background-color 0.15s, border-color 0.15s;
+    }
+
+    .result-card:hover {
+      background-color: #f7f9f5;
+      border-color: #87a878;
+    }
+
+    .result-card.highlighted {
+      border-left: 3px solid #2d4a2d;
+      background-color: #eef2eb;
+    }
+
+    .result-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .result-name {
+      font-size: 0.875rem;
+      font-weight: bold;
+      color: #1a2e1a;
+    }
+
+    .result-badge {
+      font-size: 0.7rem;
+      padding: 2px 9px;
+      border-radius: 10px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .result-badge.hospital {
+      background-color: #2d4a2d;
+      color: #ffffff;
+    }
+
+    .result-badge.clinic {
+      background-color: #87a878;
+      color: #ffffff;
+    }
+
+    .result-address {
+      font-size: 0.78rem;
+      color: #4a5e40;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .result-meta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .accredited-tag {
+      font-size: 0.72rem;
+      border: 1px solid #87a878;
+      border-radius: 10px;
+      padding: 2px 8px;
+      color: #2d4a2d;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .distance-tag {
+      font-size: 0.72rem;
+      color: #6b8f5e;
+    }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      padding: 8px 0 0;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: #4a5e40;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .legend-dot.hospital { background-color: #2d4a2d; }
+    .legend-dot.clinic   { background-color: #87a878; }
+
+    /* ── ACCREDITATION INFO BANNER ── */
+    .info-banner {
+      background-color: #2d4a2d;
+      border: 1px solid #87a878;
+      border-radius: 8px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+
+    .info-banner p {
+      font-size: 0.9rem;
+      color: #ffffff;
+      font-weight: 500;
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    .btn-accreditation {
+      font-size: 0.875rem;
+      font-weight: bold;
+      padding: 10px 28px;
+      border: 2px solid #ffffff;
+      border-radius: 6px;
+      background-color: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      color: #ffffff;
+      transition: background-color 0.18s, color 0.18s;
+    }
+
+    .btn-accreditation:hover {
+      background-color: #ffffff;
+      color: #2d4a2d;
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER  →  Sage green (#87a878)
+    ══════════════════════════════════════ */
+    footer {
+      background-color: #87a878;
+      border-top: 2px solid #6b8f5e;
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 0 8px;
+      transition: color 0.15s;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: #2d4a2d;
+    }
+
+    /* ── FLOATING HELP BUTTON ── */
+    .help-btn {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: #2d4a2d;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: bold;
+      border: 2px solid #87a878;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+
+    .help-btn:hover { background-color: #3d6b3d; }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV — Sage green -->
+  <nav>
+    <a href="Mainpage.html" class="logo">Senior Citizens Hub</a>
+    <ul>
+      <li><a href="mainpage.html">Home</a></li>
+      <li><a href="guide.html">Guide Mode</a></li>
+      <li><a href="alert.html">Scam Alert</a></li>
+      <li><a href="locator.html" class="active">Provider Locator</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE LAYOUT = SIDEBAR + MAIN -->
+  <div class="page-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+
+      <a href="mainpage.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Home
+      </a>
+
+      <a href="guide.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Guide Mode
+      </a>
+
+      <a href="alert.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Scam Alert
+      </a>
+
+      <a href="accredited.html" class="sidebar-item active">
+        <div class="sidebar-icon"></div>
+        Accredited Hospitals
+      </a>
+
+      <div class="sidebar-spacer"></div>
+      <hr class="sidebar-divider" />
+
+      <a href="#" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Help &amp; Support
+      </a>
+
+      <a href="index.html" class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        Logout
+      </a>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+      <!-- Page heading -->
+      <div class="page-heading">
+        <h1>Accredited Health Facilities</h1>
+        <p>Search accredited hospitals and clinics near you.</p>
+      </div>
+
+      <!-- Search Panel -->
+      <div class="search-panel">
+        <div class="search-panel-title">
+          <div class="search-icon-circle">&#128269;</div>
+          Search Accredited Providers
+        </div>
+
+        <div class="search-row">
+          <!-- Keyword search -->
+          <div class="search-input-wrap">
+            <span class="input-icon">&#128269;</span>
+            <input type="text" id="keyword-input" placeholder="Hospital or clinic name..." aria-label="Search by name" />
+          </div>
+
+          <!-- Location filter dropdown -->
+          <div class="filter-wrap">
+            <select id="location-filter" aria-label="Filter by location">
+              <option value="">Filter by Location</option>
+              <optgroup label="Metro Manila">
+                <option value="manila">Manila</option>
+                <option value="quezon-city">Quezon City</option>
+                <option value="makati">Makati</option>
+                <option value="pasig">Pasig</option>
+                <option value="taguig">Taguig</option>
+                <option value="mandaluyong">Mandaluyong</option>
+                <option value="caloocan">Caloocan</option>
+              </optgroup>
+              <optgroup label="Luzon">
+                <option value="cebu">Cebu City</option>
+                <option value="davao">Davao City</option>
+                <option value="iloilo">Iloilo City</option>
+                <option value="baguio">Baguio City</option>
+              </optgroup>
+              <optgroup label="Visayas">
+                <option value="bacolod">Bacolod City</option>
+                <option value="tacloban">Tacloban City</option>
+              </optgroup>
+              <optgroup label="Mindanao">
+                <option value="cagayan">Cagayan de Oro</option>
+                <option value="zamboanga">Zamboanga City</option>
+              </optgroup>
+            </select>
+            <span class="dropdown-arrow">▼</span>
+          </div>
+
+          <!-- Provider type dropdown -->
+          <div class="filter-wrap">
+            <select id="type-filter" aria-label="Filter by provider type">
+              <option value="">All Provider Types</option>
+              <option value="hospital">Hospitals</option>
+              <option value="clinic">Clinics</option>
+              <option value="specialist">Specialist Centers</option>
+              <option value="dialysis">Dialysis Centers</option>
+            </select>
+            <span class="dropdown-arrow">▼</span>
+          </div>
+
+          <button class="btn-search" onclick="handleSearch()">Search</button>
+        </div>
+
+        <!-- Active filter tags -->
+        <div class="filter-tags" id="filter-tags">
+          <span class="filter-tag-label">Active filters:</span>
+        </div>
+      </div>
+
+      <!-- Map + Results Split -->
+      <div class="map-results-split">
+
+        <!-- LEFT: Map Panel -->
+        <div class="map-panel">
+          <div class="map-panel-header">
+            &#128205; Interactive Map
+          </div>
+
+
+          <div class="map-image-area" id="map-area">
+
+            <!-- REPLACE THIS DIV with <img src="your-map.png" alt="Map"> -->
+            <img src="Photo/map.png" alt="Description of my photo">
+             
+          </div>
+        </div>
+
+        <!-- RIGHT: Results Panel -->
+        <div class="results-panel">
+          <div class="results-panel-header">
+            Nearby Providers
+            <span class="results-count">5 found</span>
+          </div>
+
+          <div class="results-list">
+
+            <div class="result-card highlighted">
+              <div class="result-card-header">
+                <span class="result-name">Novaliches District Hospital</span>
+                <span class="result-badge hospital">Hospital</span>
+              </div>
+              <div class="result-address">&#128205; 680 Quirino Hwy, Novaliches, Quezon City, 1116 Metro Manila</div>
+              <div class="result-meta">
+                <span class="accredited-tag">&#10003; Accredited</span>
+                <span class="distance-tag">1.2 km away</span>
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-card-header">
+                <span class="result-name">Healthway FEU - NRMF Medical Center</span>
+                <span class="result-badge hospital">Hospital</span>
+              </div>
+              <div class="result-address">&#128205; 19 Regalado Ave, Novaliches, Quezon City, 1118 Metro Manila</div>
+              <div class="result-meta">
+                <span class="accredited-tag">&#10003; Accredited</span>
+                <span class="distance-tag">3.4 km away</span>
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-card-header">
+                <span class="result-name">General Malvar Hospital</span>
+                <span class="result-badge hospital">Hospital</span>
+              </div>
+              <div class="result-address">&#128205; 531 Commonwealth Ave, Matandang Balara, Quezon City, Metro Manila</div>
+              <div class="result-meta">
+                <span class="accredited-tag">&#10003; Accredited</span>
+                <span class="distance-tag">2.1 km away</span>
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-card-header">
+                <span class="result-name">Metro North Medical Center Hospital</span>
+                <span class="result-badge hospital">Hospital</span>
+              </div>
+              <div class="result-address">&#128205; 1001 Mindanao Ave Ext, Brgy, Quezon City, 1106 Metro Manila</div>
+              <div class="result-meta">
+                <span class="accredited-tag">&#10003; Accredited</span>
+                <span class="distance-tag">4.7 km away</span>
+              </div>
+            </div>
+
+            <div class="result-card">
+              <div class="result-card-header">
+                <span class="result-name">Dr. Montano G. Ramos General Hospital</span>
+                <span class="result-badge hospital">Hospital</span>
+              </div>
+              <div class="result-address">&#128205; 46 Bukidnon, Bago Bantay, Quezon City, 1105 Kalakhang Maynila</div>
+              <div class="result-meta">
+                <span class="accredited-tag">&#10003; Accredited</span>
+                <span class="distance-tag">6.0 km away</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Map legend -->
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot hospital"></div>
+          Hospital
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot clinic"></div>
+          Clinic / Health Center
+        </div>
+      </div>
+
+      <!-- Accreditation Info CTA -->
+      <div class="info-banner">
+        <p>All listed providers are PhilHealth-accredited. Only accredited hospitals and clinics are eligible for senior citizen benefits and discounts.</p>
+        <a href="#" class="btn-accreditation">Check Accreditation Status</a>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- FOOTER — Sage green -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">Terms of Use</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Help Center</a>
+    </div>
+  </footer>
+
+  <!-- Floating help button -->
+  <button class="help-btn" title="Help">?</button>
+
+</body>
+</html>
